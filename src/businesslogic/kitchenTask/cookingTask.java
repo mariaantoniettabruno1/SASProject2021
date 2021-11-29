@@ -68,16 +68,14 @@ public class cookingTask {
     public class ImportanceComparator implements Comparator<cookingTask> {
         @Override
         public int compare(cookingTask ctsk1, cookingTask ctsk2) {
-            int result = (Integer.valueOf(ctsk1.importance).compareTo(ctsk2.importance));
-            return result;
+            return (Integer.valueOf(ctsk1.importance).compareTo(ctsk2.importance));
         }
     }
 
     public class DifficultyComparator implements Comparator<cookingTask> {
         @Override
         public int compare(cookingTask ctsk1, cookingTask ctsk2) {
-            int result = (Integer.valueOf(ctsk1.difficulty).compareTo(ctsk2.difficulty));
-            return result;
+            return  (Integer.valueOf(ctsk1.difficulty).compareTo(ctsk2.difficulty));
         }
     }
 }

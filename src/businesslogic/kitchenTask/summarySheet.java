@@ -16,19 +16,26 @@ public class summarySheet extends cookingTask {
     }
 
     public void addCookingTask(ArrayList<Turn> turn, double preparation_time, int quantity, int portions, int difficulty, int importance, Recipe recipe) throws UseCaseLogicException {
-        cookingTask ctsk = create(recipe, turn, preparation_time, quantity, difficulty, portions, importance);
-        sheetCookingTask.add(ctsk);
+        if(recipe!=null && turn!=null && preparation_time!=0.00){
+            cookingTask ctsk = create(recipe, turn, preparation_time, quantity, difficulty, portions, importance);
+            sheetCookingTask.add(ctsk);
+        }
+        else throw new UseCaseLogicException();
+
     }
 
     public void deleteCookingTask(cookingTask ctsk) {
         sheetCookingTask.remove(ctsk);
     }
 
-    public void editCookingTask(ArrayList<Turn> turn, double preparation_time, int quantity, int portions, int difficulty, int importance, Recipe recipe, cookingTask ctsk) {
-        ctsk.setDifficulty(difficulty);
-        ctsk.setImportance(importance);
-        ctsk.setPortions(portions);
-        ctsk.setPreparation_time(preparation_time);
+    public void editCookingTask(ArrayList<Turn> turn, double preparation_time, int quantity, int portions, int difficulty, int importance, Recipe recipe, cookingTask ctsk)throws UseCaseLogicException {
+        if(recipe!=null && turn!=null && preparation_time!=0.00) {
+            ctsk.setDifficulty(difficulty);
+            ctsk.setImportance(importance);
+            ctsk.setPortions(portions);
+            ctsk.setPreparation_time(preparation_time);
+        }
+        else throw new UseCaseLogicException();
     }
 
     public void orderSummarySheet(boolean sortedByImportance, boolean sortedByDifficulty) throws UseCaseLogicException {
@@ -36,8 +43,7 @@ public class summarySheet extends cookingTask {
 
         else if (sortedByDifficulty) {
             sheetCookingTask.sort(new DifficultyComparator());
-        }
-        else {
+        } else {
             sheetCookingTask.sort(new ImportanceComparator());
         }
 
