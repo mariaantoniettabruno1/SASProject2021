@@ -1,4 +1,4 @@
 package businesslogic;
 
-public class UseCaseLogicException {
+public class UseCaseLogicException extends Exception{
 }

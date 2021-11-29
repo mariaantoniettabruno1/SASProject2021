@@ -4,17 +4,18 @@ import businesslogic.recipe.Recipe;
 import businesslogic.turn.Turn;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class cookingTask {
-    Recipe recipe;
-    ArrayList<Turn> turn;
-    double preparation_time;
-    int quantity;
-    int difficulty;
-    int portions;
-    int importance;
+   private Recipe recipe;
+   private ArrayList<Turn> turn;
+   private double preparation_time;
+   private int quantity;
+   private int difficulty;
+   private int portions;
+   private int importance;
 
-    public cookingTask(Recipe recipe, ArrayList<Turn> turn, double preparation_time, int quantity, int difficulty, int portions, int importance) {
+    public cookingTask create(Recipe recipe, ArrayList<Turn> turn, double preparation_time, int quantity, int difficulty, int portions, int importance) {
         this.recipe = recipe;
         this.turn = turn;
         this.preparation_time = preparation_time;
@@ -22,6 +23,7 @@ public class cookingTask {
         this.difficulty = difficulty;
         this.portions = portions;
         this.importance = importance;
+        return this;
     }
 
     public double getPreparation_time() {
@@ -62,5 +64,20 @@ public class cookingTask {
 
     public void setImportance(int importance) {
         this.importance = importance;
+    }
+    public class ImportanceComparator implements Comparator<cookingTask> {
+        @Override
+        public int compare(cookingTask ctsk1, cookingTask ctsk2) {
+            int result = (Integer.valueOf(ctsk1.importance).compareTo(ctsk2.importance));
+            return result;
+        }
+    }
+
+    public class DifficultyComparator implements Comparator<cookingTask> {
+        @Override
+        public int compare(cookingTask ctsk1, cookingTask ctsk2) {
+            int result = (Integer.valueOf(ctsk1.difficulty).compareTo(ctsk2.difficulty));
+            return result;
+        }
     }
 }
