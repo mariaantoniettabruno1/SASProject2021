@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class summarySheet extends cookingTask {
-    private ArrayList<cookingTask> sheetCookingTask;
+    private final ArrayList<cookingTask> sheetCookingTask;
 
     public summarySheet(ArrayList<cookingTask> sheetCookingTask) {
         this.sheetCookingTask = sheetCookingTask;
     }
 
-    public void addCookingTask(ArrayList<Turn> turn, double preparation_time, int quantity, int portions, int difficulty, int importance, Recipe recipe) throws UseCaseLogicException {
-        if(recipe!=null && turn!=null && preparation_time!=0.00){
+    public void addCookingTask(ArrayList<Turn> turn, double preparation_time, Integer quantity, Integer portions, Integer difficulty, Integer importance, Recipe recipe) throws UseCaseLogicException {
+        if(recipe!=null && preparation_time!=0.00){
             cookingTask ctsk = create(recipe, turn, preparation_time, quantity, difficulty, portions, importance);
             sheetCookingTask.add(ctsk);
         }
@@ -28,11 +28,12 @@ public class summarySheet extends cookingTask {
         sheetCookingTask.remove(ctsk);
     }
 
-    public void editCookingTask(ArrayList<Turn> turn, double preparation_time, int quantity, int portions, int difficulty, int importance, Recipe recipe, cookingTask ctsk)throws UseCaseLogicException {
-        if(recipe!=null && turn!=null && preparation_time!=0.00) {
+    public void editCookingTask(ArrayList<Turn> turn, double preparation_time, Integer quantity, Integer portions, Integer difficulty, Integer importance, cookingTask ctsk)throws UseCaseLogicException {
+        if (preparation_time!=0.00) {
             ctsk.setDifficulty(difficulty);
             ctsk.setImportance(importance);
             ctsk.setPortions(portions);
+            ctsk.setQuantity(quantity);
             ctsk.setPreparation_time(preparation_time);
         }
         else throw new UseCaseLogicException();

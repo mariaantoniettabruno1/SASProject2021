@@ -7,22 +7,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class cookingTask {
-   private Recipe recipe;
-   private ArrayList<Turn> turn;
-   private double preparation_time;
-   private int quantity;
-   private int difficulty;
-   private int portions;
-   private int importance;
+    private Recipe recipe;
+    private ArrayList<Turn> turn;
+    private double preparation_time;
+    private Integer quantity;
+    private Integer difficulty;
+    private Integer portions;
+    private Integer importance;
+    private boolean completed = false;
 
-    public cookingTask create(Recipe recipe, ArrayList<Turn> turn, double preparation_time, int quantity, int difficulty, int portions, int importance) {
+    public cookingTask create(Recipe recipe, ArrayList<Turn> turn, double preparation_time, Integer quantity, Integer difficulty, Integer portions, Integer importance) {
         this.recipe = recipe;
         this.turn = turn;
         this.preparation_time = preparation_time;
-        this.quantity = quantity;
-        this.difficulty = difficulty;
-        this.portions = portions;
-        this.importance = importance;
+
+        if (quantity == null || quantity < 1) this.quantity = -1;
+        if (difficulty == null || difficulty < 1 || difficulty>5) this.difficulty = 0;
+        if (portions == null || portions < 1) this.portions = -1;
+        if (importance == null || importance < 1|| importance>10) this.importance = 0;
+
         return this;
     }
 
@@ -34,48 +37,57 @@ public class cookingTask {
         this.preparation_time = preparation_time;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public int getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(int difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
-    public int getPortions() {
+    public Integer getPortions() {
         return portions;
     }
 
-    public void setPortions(int portions) {
+    public void setPortions(Integer portions) {
         this.portions = portions;
     }
 
-    public int getImportance() {
+    public Integer getImportance() {
         return importance;
     }
 
-    public void setImportance(int importance) {
+    public void setImportance(Integer importance) {
         this.importance = importance;
     }
-    public class ImportanceComparator implements Comparator<cookingTask> {
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public static class ImportanceComparator implements Comparator<cookingTask> {
         @Override
         public int compare(cookingTask ctsk1, cookingTask ctsk2) {
-            return (Integer.valueOf(ctsk1.importance).compareTo(ctsk2.importance));
+            return (ctsk1.importance.compareTo(ctsk2.importance));
         }
     }
 
-    public class DifficultyComparator implements Comparator<cookingTask> {
+    public static class DifficultyComparator implements Comparator<cookingTask> {
         @Override
         public int compare(cookingTask ctsk1, cookingTask ctsk2) {
-            return  (Integer.valueOf(ctsk1.difficulty).compareTo(ctsk2.difficulty));
+            return (ctsk1.difficulty.compareTo(ctsk2.difficulty));
         }
     }
 }
