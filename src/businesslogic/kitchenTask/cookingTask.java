@@ -90,4 +90,15 @@ public class cookingTask {
             return (ctsk1.difficulty.compareTo(ctsk2.difficulty));
         }
     }
+    public java.lang.String toString() {
+        return "cookingTask{" +
+                " recipe=" + recipe +
+                ", turns=" + turn +
+                ", quantity=" + quantity +
+                ", time=" + preparation_time +
+                ", portions=" + portions +
+                ", difficulty=" + difficulty +
+                ", importance=" + importance +
+                '}';
+    }
 }

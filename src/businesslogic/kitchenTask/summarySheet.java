@@ -15,7 +15,11 @@ public class summarySheet extends cookingTask {
         this.sheetCookingTask = sheetCookingTask;
     }
 
-    public void addCookingTask(ArrayList<Turn> turn, double preparation_time, Integer quantity, Integer portions, Integer difficulty, Integer importance, Recipe recipe) throws UseCaseLogicException {
+    public summarySheet() {
+        this.sheetCookingTask = new ArrayList<cookingTask>();
+    }
+
+    public void addCookingTask(Recipe recipe, ArrayList<Turn> turn, double preparation_time, Integer quantity, Integer difficulty, Integer portions, Integer importance) throws UseCaseLogicException {
         if(recipe!=null && preparation_time!=0.00){
             cookingTask ctsk = create(recipe, turn, preparation_time, quantity, difficulty, portions, importance);
             sheetCookingTask.add(ctsk);
@@ -49,5 +53,10 @@ public class summarySheet extends cookingTask {
         }
 
     }
-
+public ArrayList<cookingTask> openSummarySheet(){
+        return this.sheetCookingTask;
+}
+public void makeCookingTaskDone(cookingTask ctsk){
+        ctsk.setCompleted(true);
+}
 }
